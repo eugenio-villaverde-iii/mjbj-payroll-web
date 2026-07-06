@@ -1,0 +1,331 @@
+/**
+ * MJBJ Payroll — Design System Stylesheet
+ * ============================================
+ * Built from the Claude Design token export
+ * (docs/design-exports/MJBJ Payroll Design System-handoff/).
+ * Replaces mjbj-theme.css (archived to legacy/) as of UI Batch 1a.
+ * To rebrand: update the values in :root only.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap');
+
+:root {
+
+  /* ── APP META (unchanged — not part of the design-system export) ── */
+  --app-name               : "MJBJ Payroll";
+  --app-name-short         : "MJBJ";
+
+  /* ── TYPOGRAPHY ── */
+  --font-ui                : 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  --font-display           : 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-numeric           : 'IBM Plex Sans', monospace;
+  --font-feature-numeric   : "tnum" on, "lnum" on;
+  --bs-body-font-family    : var(--font-ui);
+  --bs-body-font-size      : 0.875rem;
+  --bs-body-font-weight    : 400;
+  --bs-body-line-height    : 1.5;
+
+  --text-xs    : 0.6875rem;  /* 11px — badges, meta */
+  --text-sm    : 0.75rem;    /* 12px — labels, nav items */
+  --text-table : 0.8125rem;  /* 13px — table rows, buttons */
+  --text-base  : 0.875rem;   /* 14px — body */
+  --text-md    : 1rem;
+  --text-lg    : 1.25rem;
+  --text-xl    : 1.5rem;
+  --text-2xl   : 2rem;
+
+  --weight-regular  : 400;
+  --weight-medium   : 500;
+  --weight-semibold : 600;
+  --weight-bold     : 700;
+
+  --leading-tight  : 1.2;
+  --leading-snug   : 1.35;
+  --leading-normal : 1.5;
+
+  --tracking-label : 0.08em;
+
+    /* ── COLOR — ACCENT ── */
+  --bs-primary          : #3a8c6e;
+  --bs-primary-rgb      : 58, 140, 110;
+  --color-accent        : var(--bs-primary);
+  --color-accent-hover  : #2a6b52;
+  --color-accent-active : #1f5c47;
+  --color-accent-subtle : #edf7f3;
+  --color-accent-border : #c8e8de;
+  --color-accent-rgb    : 58, 140, 110;
+
+  /* ── SURFACES ── */
+  --surface-canvas      : #f3f4f6;
+  --surface-content     : #ffffff;
+  --surface-content-alt : #fafbfc;
+
+  /* ── BORDERS ── */
+  --border-default      : #e0e4e8;
+  --border-subtle       : #f0f2f4;
+  --border-width        : 1px;
+  --border-solid        : 1px solid var(--border-default);
+  --border-subtle-solid : 1px solid var(--border-subtle);
+
+  /* ── TEXT ── */
+  --text-primary   : #1a2a1a;
+  --text-secondary : #556677;
+  --text-muted     : #99aab0;
+  --text-accent    : #1f5c47;
+  --text-on-accent : #ffffff;
+  --bs-body-color  : var(--text-primary);
+
+  /* ── STATUS BADGES ── */
+  --status-finalized-bg   : #00c853;
+  --status-finalized-text : #003d18;
+  --status-open-bg        : #fff3e0;
+  --status-open-text      : #a05000;
+  --status-open-border    : #f5c97a;
+  --status-draft-bg       : #ebebed;
+  --status-draft-text     : #556677;
+
+    /* ── SEMANTIC SYSTEM COLORS (alerts/toasts/validation only) ── */
+  --success        : #1e8c38;
+  --success-rgb    : 30, 140, 56;
+  --warning        : #e8a020;
+  --warning-rgb    : 232, 160, 32;
+  --danger         : #d63b3b;
+  --danger-rgb     : 214, 59, 59;
+  --info           : #2a7ab5;
+  --info-rgb       : 42, 122, 181;
+  --bs-success     : var(--success);
+  --bs-success-rgb : var(--success-rgb);
+  --bs-warning     : var(--warning);
+  --bs-warning-rgb : var(--warning-rgb);
+  --bs-danger      : var(--danger);
+  --bs-danger-rgb  : var(--danger-rgb);
+  --bs-info        : var(--info);
+  --bs-info-rgb    : var(--info-rgb);
+
+  /* ── RADIUS ── */
+  --radius-sm           : 0.25rem;
+  --radius              : 0.375rem;
+  --radius-md           : 0.3125rem;
+  --radius-lg           : 0.5rem;
+  --radius-pill         : 99px;
+  --bs-border-radius    : var(--radius);
+  --bs-border-radius-sm : var(--radius-sm);
+  --bs-border-radius-lg : var(--radius-lg);
+  --badge-radius-pill   : 99px;
+  --badge-radius-soft   : 4px;
+  --badge-radius-flat   : 3px;
+
+  /* ── SHADOWS ── */
+  --shadow-sm        : 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow           : 0 2px 6px rgba(0, 0, 0, 0.08);
+  --shadow-md        : 0 4px 12px rgba(0, 0, 0, 0.10);
+  --shadow-lg        : 0 12px 32px rgba(0, 0, 0, 0.14);
+  --bs-box-shadow-sm : var(--shadow-sm);
+  --bs-box-shadow    : var(--shadow);
+
+  /* ── FOCUS RING ── */
+  --focus-ring : 0 0 0 0.2rem rgba(58, 140, 110, 0.18);
+
+  /* ── MOTION ── */
+  --ease-out        : cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast : 120ms ease;
+  --transition      : 160ms ease;
+
+    /* ── SPACING / LAYOUT ── */
+  --space-1  : 0.25rem;
+  --space-2  : 0.375rem;
+  --space-3  : 0.5rem;
+  --space-4  : 0.6875rem;
+  --space-5  : 0.875rem;
+  --space-6  : 1rem;
+  --space-7  : 1.25rem;
+  --space-8  : 1.5rem;
+  --space-10 : 2rem;
+  --space-12 : 3rem;
+  --sidebar-width : 220px;
+  --topbar-height : 52px;
+  --content-max   : 1280px;
+  --page-gutter   : var(--space-8);
+
+  /* ── COMPONENT OVERRIDES — buttons ── */
+  --bs-btn-font-family   : var(--font-ui);
+  --bs-btn-font-size     : var(--text-table);
+  --bs-btn-font-weight   : var(--weight-medium);
+  --bs-btn-border-radius : var(--radius-md);
+  --bs-btn-padding-y     : var(--space-2);
+  --bs-btn-padding-x     : var(--space-4);
+
+  /* ── COMPONENT OVERRIDES — tables ── */
+  --bs-table-bg            : var(--surface-content);
+  --bs-table-striped-bg    : var(--surface-content-alt);
+  --bs-table-hover-bg      : var(--color-accent-subtle);
+  --bs-table-border-color  : var(--border-subtle);
+  --bs-table-color         : var(--text-primary);
+  --bs-table-striped-color : var(--text-primary);
+
+  /* ── COMPONENT OVERRIDES — cards ── */
+  --bs-card-bg            : var(--surface-content);
+  --bs-card-border-color  : var(--border-default);
+  --bs-card-border-radius : var(--radius);
+  --bs-card-spacer-y      : var(--space-5);
+  --bs-card-spacer-x      : var(--space-6);
+
+  /* ── COMPONENT OVERRIDES — form controls ── */
+  --bs-input-bg                 : var(--surface-content);
+  --bs-input-border-color       : var(--border-default);
+  --bs-input-focus-border-color : var(--color-accent);
+  --bs-input-focus-box-shadow   : var(--focus-ring);
+  --bs-input-font-size          : var(--text-sm);
+
+  /* ── NAVIGATION / SIDEBAR ── */
+  --nav-sidebar-bg          : var(--surface-canvas);
+  --nav-sidebar-width       : var(--sidebar-width);
+  --nav-item-color          : var(--text-secondary);
+  --nav-item-active-color   : var(--text-accent);
+  --nav-item-active-bg      : var(--color-accent-subtle);
+  --nav-item-active-border  : var(--color-accent);
+  --nav-item-hover-bg       : rgba(var(--color-accent-rgb), 0.07);
+  --nav-section-label-color : var(--text-muted);
+
+  /* ── BADGES ── */
+  --badge-font-size   : var(--text-xs);
+  --badge-font-weight : var(--weight-semibold);
+  --badge-padding-y   : 2px;
+  --badge-padding-x   : 6px;
+}
+
+/* ─────────────────────────────────────────
+   UTILITY CLASSES
+───────────────────────────────────────── */
+
+.font-display { font-family: var(--font-display); }
+.font-ui      { font-family: var(--font-ui); }
+.font-numeric {
+  font-family: var(--font-numeric);
+  font-feature-settings: var(--font-feature-numeric);
+}
+
+h1, h2, .page-title, .app-name {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+}
+h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+}
+
+/* ── STATUS BADGES ── */
+.badge-finalized {
+  background-color: var(--status-finalized-bg);
+  color: var(--status-finalized-text);
+  border-radius: var(--badge-radius-pill);
+  font-size: var(--badge-font-size);
+  font-weight: var(--badge-font-weight);
+  padding: var(--badge-padding-y) var(--badge-padding-x);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.badge-open {
+  background-color: var(--status-open-bg);
+  color: var(--status-open-text);
+  border: 0.5px solid var(--status-open-border);
+  border-radius: var(--badge-radius-soft);
+  font-size: var(--badge-font-size);
+  font-weight: var(--badge-font-weight);
+  padding: var(--badge-padding-y) var(--badge-padding-x);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.badge-draft {
+  background-color: var(--status-draft-bg);
+  color: var(--status-draft-text);
+  border-radius: var(--badge-radius-flat);
+  font-size: var(--badge-font-size);
+  font-weight: var(--badge-font-weight);
+  padding: var(--badge-padding-y) var(--badge-padding-x);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* ── ACTIVE TABLE ROW ── */
+.table > tbody > tr.row-active {
+  border-left: 3px solid var(--color-accent);
+  background-color: var(--color-accent-subtle);
+}
+.table > tbody > tr.row-active td:first-child {
+  font-weight: var(--weight-medium);
+  color: var(--text-accent);
+}
+
+/* ── SIDEBAR NAV ── */
+.sidebar {
+  width: var(--nav-sidebar-width);
+  background: var(--nav-sidebar-bg);
+  border-right: var(--border-solid);
+}
+.sidebar .nav-link {
+  font-size: var(--text-sm);
+  color: var(--nav-item-color);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: var(--space-3) var(--space-3);
+  transition: background var(--transition-fast);
+}
+.sidebar .nav-link:hover {
+  background-color: var(--nav-item-hover-bg);
+  color: var(--text-accent);
+}
+.sidebar .nav-link.active {
+  background-color: var(--nav-item-active-bg);
+  color: var(--nav-item-active-color);
+  font-weight: var(--weight-medium);
+  border-left: 3px solid var(--nav-item-active-border);
+  padding-left: calc(var(--space-3) - 3px);
+}
+.sidebar .nav-section-label {
+  font-size: 0.625rem;
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--nav-section-label-color);
+  padding: var(--space-3) var(--space-3) 0.125rem;
+}
+
+/* ── PRIMARY BUTTON ── */
+.btn-primary {
+  --bs-btn-bg: var(--color-accent);
+  --bs-btn-border-color: var(--color-accent);
+  --bs-btn-hover-bg: var(--color-accent-hover);
+  --bs-btn-hover-border-color: var(--color-accent-hover);
+  --bs-btn-active-bg: var(--color-accent-active);
+  --bs-btn-active-border-color: var(--color-accent-active);
+  --bs-btn-focus-shadow-rgb: var(--bs-primary-rgb);
+  color: var(--text-on-accent);
+}
+
+/* ── FORM FOCUS RING ── */
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--color-accent);
+  box-shadow: var(--bs-input-focus-box-shadow);
+}
+
+/* ── PAGE CANVAS ── */
+body {
+  background-color: var(--surface-canvas);
+  font-family: var(--font-ui);
+  color: var(--text-primary);
+}
+.content-area {
+  background-color: var(--surface-canvas);
+}
+.content-card {
+  background-color: var(--surface-content);
+  border: 1px solid var(--border-default);
+  border-radius: var(--bs-card-border-radius);
+}
