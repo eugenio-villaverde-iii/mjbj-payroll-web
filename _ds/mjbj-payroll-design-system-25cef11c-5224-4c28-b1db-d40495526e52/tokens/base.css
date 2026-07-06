@@ -1,0 +1,38 @@
+/* MJBJ Payroll — base resets & typographic roles
+ * Minimal global rules applied on top of the tokens.
+ */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background-color: var(--surface-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Display font for titles & headers */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  margin: 0;
+}
+h1, h2 { font-weight: var(--weight-bold); }
+h3, h4, h5, h6 { font-weight: var(--weight-semibold); }
+
+/* Typographic role helpers */
+.font-display { font-family: var(--font-display); }
+.font-ui { font-family: var(--font-ui); }
+.font-numeric {
+  font-family: var(--font-numeric);
+  font-feature-settings: var(--font-feature-numeric);
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+a:hover { color: var(--color-accent-hover); }
