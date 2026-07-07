@@ -34,13 +34,35 @@
         <span title="Settings" class="icon-btn" style="width:34px;height:34px;">
           <i class="bi bi-gear" style="font-size:16px"></i>
         </span>
-        <button type="button" style="display:flex;align-items:center;gap:8px;background:var(--surface-content);border:1px solid var(--border-default);border-radius:99px;padding:3px 6px 3px 4px;cursor:pointer;box-shadow:var(--shadow-sm);width:85px;justify-content:flex-end">
-          <span style="width:30px;height:30px;border-radius:6px;background:var(--surface-canvas);border:1px solid var(--border-subtle);display:inline-flex;align-items:center;justify-content:center;color:var(--text-muted)" title="Company logo">
-            <i class="bi bi-buildings" style="font-size:15px"></i>
-          </span>
-          <span style="width:30px;height:30px;border-radius:99px;background:var(--color-accent);color:var(--text-on-accent);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-ui);font-size:12px;font-weight:600;line-height:1">RS</span>
-        </button>
+        <div style="position:relative">
+          <button type="button" id="profileToggle" style="display:flex;align-items:center;gap:8px;background:var(--surface-content);border:1px solid var(--border-default);border-radius:99px;padding:3px 6px 3px 4px;cursor:pointer;box-shadow:var(--shadow-sm);width:85px;justify-content:flex-end">
+            <span style="width:30px;height:30px;border-radius:6px;background:var(--surface-canvas);border:1px solid var(--border-subtle);display:inline-flex;align-items:center;justify-content:center;color:var(--text-muted)" title="Company logo">
+              <i class="bi bi-buildings" style="font-size:15px"></i>
+            </span>
+            <span style="width:30px;height:30px;border-radius:99px;background:var(--color-accent);color:var(--text-on-accent);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-ui);font-size:12px;font-weight:600;line-height:1">RS</span>
+          </button>
+          <div id="profileMenu" class="topbar-profile-menu" style="position:absolute;top:calc(100% + 8px);right:0;width:296px;background:var(--surface-content);border:1px solid var(--border-default);border-radius:var(--radius);box-shadow:var(--shadow-lg);z-index:50;overflow:hidden">
+            <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:20px 18px 16px">
+              <span style="width:52px;height:52px;border-radius:99px;background:var(--color-accent);color:var(--text-on-accent);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:22px;font-weight:700;line-height:1">RS</span>
+              <div>
+                <div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-md);color:var(--text-primary);line-height:1.2">Rosa Santos</div>
+                <div style="font-family:var(--font-ui);font-size:var(--text-sm);color:var(--text-muted);margin-top:2px">rosa.santos@mjbj.example</div>
+              </div>
+              <span style="font-family:var(--font-ui);font-size:var(--text-xs);color:var(--text-accent);background:var(--color-accent-subtle);border:1px solid var(--color-accent-border);border-radius:99px;padding:3px 10px;line-height:1">Payroll administrator</span>
+            </div>
+            <div style="border-top:1px solid var(--border-subtle);padding:8px">
+              <a href="index.html" class="topbar-profile-menu-item" style="width:100%;display:flex;align-items:center;gap:10px;background:transparent;border:none;border-radius:var(--radius-md);padding:9px 10px;cursor:pointer;font-family:var(--font-ui);font-size:var(--text-base);color:var(--text-secondary);text-decoration:none;">
+                <i class="bi bi-box-arrow-right" style="font-size:15px;width:18px;text-align:center"></i>
+                <span style="white-space:nowrap">Sign out</span>
+              </a>
+            </div>
+            <div style="border-top:1px solid var(--border-subtle);padding:9px 16px;background:var(--surface-content-alt);text-align:center">
+              <span style="font-family:var(--font-ui);font-size:var(--text-xs);color:var(--text-muted)">Managed by your administrator</span>
+            </div>
+          </div>
+        </div>
       </div>
+    </header>
     </header>
 
     <div style="flex:1;display:flex;min-width:0;overflow:hidden">
@@ -152,5 +174,20 @@
       </main>
     </div>
   </div>
+<script>
+  document.getElementById('sidebarToggle').addEventListener('click', function () {
+    document.getElementById('sidebar').classList.toggle('collapsed');
+  });
+
+  var profileToggle = document.getElementById('profileToggle');
+  var profileMenu = document.getElementById('profileMenu');
+  profileToggle.addEventListener('click', function (e) {
+    e.stopPropagation();
+    profileMenu.classList.toggle('show');
+  });
+  document.addEventListener('click', function () {
+    profileMenu.classList.remove('show');
+  });
+</script>
 </body>
 </html>
