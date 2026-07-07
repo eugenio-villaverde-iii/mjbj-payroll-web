@@ -43,6 +43,11 @@
 
   <p class="text-center small mb-0" style="color:var(--text-muted);">Access is provisioned by your administrator.</p>
 </div>
-
+<script>
+  document.querySelector('form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    window.location.href = 'dashboard.html';
+  });
+</script>
 </body>
 </html>
