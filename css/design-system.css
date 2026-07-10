@@ -66,6 +66,7 @@
   --border-width        : 1px;
   --border-solid        : 1px solid var(--border-default);
   --border-subtle-solid : 1px solid var(--border-subtle);
+  --border-structural   : #c5cbd1;  
 
   /* ── TEXT ── */
   --text-primary   : #1a2a1a;
@@ -267,14 +268,14 @@ h3, h4, h5, h6 {
 .sidebar {
   width: var(--nav-sidebar-width);
   background: var(--nav-sidebar-bg);
-  border-right: var(--border-solid);
+  border-right: 1px solid var(--border-structural);
   transition: width var(--transition-fast);
 }
 .sidebar .nav-link {
   display: flex;
   align-items: center;
   gap: 9px;
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   color: var(--nav-item-color);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
   padding: var(--space-3) var(--space-3);
@@ -531,4 +532,41 @@ body {
 }
 .dashboard-countdown-danger {
   color: var(--danger);
+}
+
+
+/* ── DASHBOARD LAYOUT GRIDS ── */
+.dashboard-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-5);
+}
+.dashboard-split-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+  gap: var(--space-6);
+  align-items: start;
+}
+
+/* ── COMPACT BREAKPOINT ──
+   1024px is the shared "getting tight" threshold for this app shell.
+   Any future screen adding its own stacking behavior should reuse this
+   same value rather than picking a new one, so every screen breaks at
+   a consistent point. */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 60px;
+  }
+  .sidebar .nav-link {
+    justify-content: center;
+  }
+  .sidebar .nav-link-label {
+    display: none;
+  }
+  .dashboard-metric-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .dashboard-split-row {
+    grid-template-columns: 1fr;
+  }
 }
