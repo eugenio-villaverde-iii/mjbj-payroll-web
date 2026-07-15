@@ -7,6 +7,24 @@
  * To rebrand: update the values in :root only.
  */
 
+/**
+ * TEXT CASING SPEC
+ * ============================================
+ * Four tiers — apply consistently across all UI:
+ *
+ *   UPPERCASE + letter-spacing  →  eyebrow labels, table column headers
+ *                                  (e.g. "PAYROLL", "DEPARTMENT")
+ *                                  applied via CSS text-transform, not source text
+ *   Title Case                  →  page titles, card / section / dialog headers
+ *                                  (e.g. "Company Profile", "Day Types")
+ *   Sentence case                →  buttons, form labels, hints, body text,
+ *                                  empty-state titles (e.g. "Save changes")
+ *   (lowercase                  →  not used as a deliberate style)
+ *
+ * Applies to STATIC structural text only — data-derived strings
+ * (a period's "May 2025 payroll cycle") keep their natural casing.
+ */
+
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap');
 
 :root {
@@ -60,13 +78,22 @@
   --surface-content     : #ffffff;
   --surface-content-alt : #fafbfc;
 
+  /* ── GRAY SCALE ──
+     Cool-gray neutrals matching --surface-canvas (#f3f4f6 = gray-100).
+     Referenced by the switch off-state track and secondary-button hover;
+     were used but never defined until now (undefined = transparent). */
+  --gray-50  : #f9fafb;
+  --gray-100 : #f3f4f6;
+  --gray-200 : #e5e7eb;
+  --gray-300 : #d1d5db;
+
   /* ── BORDERS ── */
   --border-default      : #e0e4e8;
   --border-subtle       : #f0f2f4;
   --border-width        : 1px;
   --border-solid        : 1px solid var(--border-default);
   --border-subtle-solid : 1px solid var(--border-subtle);
-  --border-structural   : #c5cbd1;  
+  --border-structural   : #c5cbd1;
 
   /* ── TEXT ── */
   --text-primary   : #1a2a1a;
@@ -245,6 +272,19 @@ h3, h4, h5, h6 {
 .badge-draft {
   background-color: var(--status-draft-bg);
   color: var(--status-draft-text);
+  border-radius: var(--badge-radius-flat);
+  font-size: var(--badge-font-size);
+  font-weight: var(--badge-font-weight);
+  padding: var(--badge-padding-y) var(--badge-padding-x);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.badge-upcoming {
+  background-color: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border-default);
   border-radius: var(--badge-radius-flat);
   font-size: var(--badge-font-size);
   font-weight: var(--badge-font-weight);
@@ -499,6 +539,13 @@ body {
 .icon-btn:hover {
   background: rgba(var(--color-accent-rgb), 0.07);
 }
+.icon-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.icon-btn:disabled:hover {
+  background: transparent;
+}
 
 /* ── PROFILE MENU ── */
 .topbar-profile-menu {
@@ -569,4 +616,186 @@ body {
   .dashboard-split-row {
     grid-template-columns: 1fr;
   }
+  .settings-cols {
+    grid-template-columns: 1fr;
+  }
+  .settings-rules-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── SETTINGS — two-column layout (Payroll tab) ── */
+.settings-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+  align-items: start;
+}
+
+/* ── SETTINGS — rules grid (Attendance tab placeholder section) ── */
+.settings-rules-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 20px;
+}
+
+/* ── TABS COMPONENT ── */
+.tabs-item {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  font-size: var(--text-table);
+  font-weight: var(--weight-medium);
+  color: var(--text-secondary);
+  padding: 8px 12px 9px;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+.tabs-item:hover {
+  color: var(--text-primary);
+}
+.tabs-item-active,
+.tabs-item-active:hover {
+  font-weight: var(--weight-semibold);
+  color: var(--text-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+/* ── DIALOG COMPONENT ── */
+.modal-backdrop.show {
+  background: rgba(26, 42, 26, 0.38);
+  opacity: 1;
+}
+.dialog-box {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  border: none;
+}
+.dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px var(--space-6);
+  border-bottom: var(--border-subtle-solid);
+}
+.dialog-title {
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
+  margin: 0;
+  color: var(--text-primary);
+}
+.dialog-close {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1;
+  padding: 0;
+}
+.dialog-body {
+  padding: var(--space-6);
+  font-size: var(--text-table);
+  color: var(--text-secondary);
+}
+.dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  padding: 12px var(--space-6);
+  border-top: var(--border-subtle-solid);
+  background: var(--surface-content-alt);
+}
+
+/* ── DATA TABLE — column width utilities ──
+   Used instead of an inline style="width:..." — a linter's CSS parser can't
+   tolerate Django template output inside a style attribute's CSS value
+   (the braces collide with real CSS syntax), but class="" is just a string,
+   so conditional/dynamic classes here are safe. */
+.table-ds-w-18 { width: 18%; }
+.table-ds-w-28 { width: 28%; }
+.table-ds-w-30 { width: 30%; }
+.table-ds-w-34 { width: 34%; }
+.table-ds-w-38 { width: 38%; }
+.table-ds-w-60 { width: 60%; }
+
+/* ── ICON BUTTON — danger variant ── */
+.icon-btn-danger {
+  color: var(--danger);
+}
+.icon-btn-danger:hover {
+  background: rgba(214, 59, 59, 0.08);
+}
+
+/* ── SETTINGS — logo drop zone ── */
+.settings-logo-drop {
+  flex: 1;
+  border: 1px dashed var(--border-default);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: border-color var(--transition-fast);
+}
+.settings-logo-drop:hover {
+  border-color: var(--color-accent);
+}
+
+
+/* ── SWITCH COMPONENT ── */
+.switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: var(--text-table);
+  color: var(--text-primary);
+  user-select: none;
+}
+.switch-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.switch-track {
+  width: 34px;
+  height: 20px;
+  flex: 0 0 34px;
+  border-radius: 99px;
+  background: var(--gray-300);
+  position: relative;
+  transition: background var(--transition-fast);
+}
+.switch-input:checked + .switch-track {
+  background: var(--color-accent);
+}
+.switch-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  transition: left var(--transition-fast);
+}
+.switch-input:checked + .switch-track .switch-knob {
+  left: 16px;
+}
+.switch-input:disabled + .switch-track {
+  opacity: 0.55;
+  cursor: not-allowed;
 }

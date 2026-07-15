@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MJBJ Payroll — Settings (Preview)</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/design-system.css?v=6">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+  <div style="display:flex;flex-direction:column;height:100vh;width:100%;overflow:hidden;">
+
+    <header style="height:56px;flex:0 0 56px;display:flex;align-items:center;gap:var(--space-5);padding:0 var(--space-6);background:var(--surface-content);border-bottom:1px solid var(--border-default);position:relative;z-index:30">
+      <button type="button" id="sidebarToggle" title="Toggle menu" aria-label="Toggle menu" class="icon-btn" style="width:34px;height:34px;">
+        <i class="bi bi-list" style="font-size:19px"></i>
+      </button>
+      <div style="display:flex;align-items:center;gap:10px;flex:0 0 auto">
+        <div style="width:32px;height:32px;border-radius:var(--radius-md);background:var(--color-accent);display:flex;align-items:center;justify-content:center;flex:0 0 auto">
+          <span style="font-family:var(--font-display);font-weight:700;font-size:19px;color:var(--text-on-accent);letter-spacing:-1px;line-height:1">M</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-family:var(--font-display);font-weight:700;font-size:17px;color:var(--text-primary);letter-spacing:-0.02em;line-height:1">MJBJ</span>
+          <span style="font-family:var(--font-ui);font-weight:600;font-size:9px;color:var(--text-accent);text-transform:uppercase;letter-spacing:0.14em;line-height:1;background:var(--color-accent-subtle);border:1px solid var(--color-accent-border);padding:3px 6px;border-radius:4px">Payroll</span>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;justify-content:center;min-width:0">
+        <div style="display:flex;align-items:center;gap:8px;width:100%;max-width:460px;background:var(--surface-canvas);border:1px solid var(--border-default);border-radius:var(--radius-md);padding:6px 12px;color:var(--text-muted)">
+          <i class="bi bi-search" style="font-size:13px"></i>
+          <input type="text" placeholder="Search workers, periods…" style="border:none;outline:none;background:transparent;font-family:var(--font-ui);font-size:var(--text-base);color:var(--text-primary);flex:1;min-width:0">
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;flex:0 0 auto">
+        <div style="position:relative">
+          <button type="button" id="quickToggle" title="Quick settings" aria-haspopup="true" aria-expanded="false" class="icon-btn" style="width:34px;height:34px;">
+            <i class="bi bi-gear" style="font-size:16px"></i>
+          </button>
+          <div id="quickMenu" class="topbar-profile-menu" style="position:absolute;top:calc(100% + 8px);right:0;width:280px;background:var(--surface-content);border:1px solid var(--border-default);border-radius:var(--radius);box-shadow:var(--shadow-lg);z-index:50;overflow:hidden">
+            <div style="padding:12px 14px 4px">
+              <div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-base);color:var(--text-primary)">Quick settings</div>
+            </div>
+            <div style="padding:10px 14px 14px">
+              <label class="form-label small fw-medium">Notification threshold</label>
+              <div style="display:flex;align-items:center;gap:8px">
+                <input type="number" class="form-control" style="max-width:100px" value="3">
+                <span style="font-size:var(--text-table);color:var(--text-muted)">days before cutoff</span>
+              </div>
+              <span style="font-size:var(--text-xs);color:var(--text-muted)">Warn this long before each cutoff.</span>
+              <div style="margin-top:10px">
+                <button type="button" class="btn-ds btn-ds-secondary btn-ds-sm">Save</button>
+              </div>
+            </div>
+            <div style="border-top:1px solid var(--border-subtle);padding:9px 14px;background:var(--surface-content-alt)">
+              <a href="settings.html" style="display:flex;align-items:center;justify-content:space-between;font-family:var(--font-ui);font-size:var(--text-sm);color:var(--text-accent);text-decoration:none;font-weight:500">
+                <span>See all settings</span>
+                <i class="bi bi-arrow-right" style="font-size:13px"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div style="position:relative">
+          <button type="button" id="profileToggle" style="display:flex;align-items:center;gap:8px;background:var(--surface-content);border:1px solid var(--border-default);border-radius:99px;padding:3px 6px 3px 4px;cursor:pointer;box-shadow:var(--shadow-sm);width:85px;justify-content:flex-end">
+            <span style="width:30px;height:30px;border-radius:6px;background:var(--surface-canvas);border:1px solid var(--border-subtle);display:inline-flex;align-items:center;justify-content:center;color:var(--text-muted)" title="Company logo">
+              <i class="bi bi-buildings" style="font-size:15px"></i>
+            </span>
+            <span style="width:30px;height:30px;border-radius:99px;background:var(--color-accent);color:var(--text-on-accent);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-ui);font-size:12px;font-weight:600;line-height:1">RS</span>
+          </button>
+          <div id="profileMenu" class="topbar-profile-menu" style="position:absolute;top:calc(100% + 8px);right:0;width:296px;background:var(--surface-content);border:1px solid var(--border-default);border-radius:var(--radius);box-shadow:var(--shadow-lg);z-index:50;overflow:hidden">
+            <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:20px 18px 16px">
+              <span style="width:52px;height:52px;border-radius:99px;background:var(--color-accent);color:var(--text-on-accent);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:22px;font-weight:700;line-height:1">RS</span>
+              <div>
+                <div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-md);color:var(--text-primary);line-height:1.2">Rosa Santos</div>
+                <div style="font-family:var(--font-ui);font-size:var(--text-sm);color:var(--text-muted);margin-top:2px">rosa.santos@mjbj.example</div>
+              </div>
+              <span style="font-family:var(--font-ui);font-size:var(--text-xs);color:var(--text-accent);background:var(--color-accent-subtle);border:1px solid var(--color-accent-border);border-radius:99px;padding:3px 10px;line-height:1">Payroll administrator</span>
+            </div>
+            <div style="border-top:1px solid var(--border-subtle);padding:8px">
+              <a href="index.html" class="topbar-profile-menu-item" style="width:100%;display:flex;align-items:center;gap:10px;background:transparent;border:none;border-radius:var(--radius-md);padding:9px 10px;cursor:pointer;font-family:var(--font-ui);font-size:var(--text-base);color:var(--text-secondary);text-decoration:none;">
+                <i class="bi bi-box-arrow-right" style="font-size:15px;width:18px;text-align:center"></i>
+                <span style="white-space:nowrap">Sign out</span>
+              </a>
+            </div>
+            <div style="border-top:1px solid var(--border-subtle);padding:9px 16px;background:var(--surface-content-alt);text-align:center">
+              <span style="font-family:var(--font-ui);font-size:var(--text-xs);color:var(--text-muted)">Managed by your administrator</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div style="flex:1;display:flex;min-width:0;overflow:hidden">
+      <nav class="sidebar" id="sidebar">
+        <div style="flex:1;overflow-y:auto;overflow-x:hidden;padding:12px 8px">
+          <a href="dashboard.html" class="nav-link">
+            <i class="bi bi-grid-1x2"></i>
+            <span class="nav-link-label">Dashboard</span>
+          </a>
+          <a href="#" class="nav-link">
+            <i class="bi bi-calendar3"></i>
+            <span class="nav-link-label">Payroll schedule</span>
+          </a>
+        </div>
+      </nav>
+
+      <main class="content-area" style="flex:1;overflow-y:auto;padding:0 var(--space-8) var(--space-10);">
+        <div style="padding-top:var(--space-8);display:flex;flex-direction:column;gap:var(--space-6)">
+
+          <div style="position:sticky;top:0;z-index:10;background:var(--surface-canvas);display:flex;flex-direction:column;gap:var(--space-6)">
+            <div>
+              <div style="font-family:var(--font-ui);font-size:var(--text-xs);color:var(--text-muted);text-transform:uppercase;letter-spacing:var(--tracking-label);margin-bottom:4px">Payroll</div>
+              <h1 class="font-display fw-bold" style="font-size:var(--text-xl);color:var(--text-primary);letter-spacing:-0.01em;margin:0">Settings</h1>
+            </div>
+
+            <div style="display:flex;gap:2px;border-bottom:var(--border-solid)">
+              <a href="#" class="tabs-item tabs-item-active" data-tab="company">Company</a>
+              <a href="#" class="tabs-item" data-tab="payroll">Payroll</a>
+              <a href="#" class="tabs-item" data-tab="cycle">Payroll cycle</a>
+              <a href="#" class="tabs-item" data-tab="attendance">Attendance</a>
+              <a href="#" class="tabs-item" data-tab="deductions">Deductions</a>
+            </div>
+          </div>
+
+          <!-- ── Company ── -->
+          <div data-tab-content="company">
+            <div class="content-card">
+              <div class="content-card-header"><div><div class="content-card-header-title">Company profile</div><div class="content-card-header-subtitle">Shown on payslips and reports</div></div></div>
+              <div class="content-card-body">
+                <div style="display:flex;flex-direction:column;gap:16px;max-width:560px">
+                  <div>
+                    <label class="form-label small fw-medium">Company name</label>
+                    <input type="text" class="form-control" value="MJBJ Agri Ventures">
+                  </div>
+                  <div>
+                    <label class="form-label small fw-medium">Address</label>
+                    <textarea class="form-control" rows="3">Purok 4, Brgy. San Isidro, Nueva Ecija</textarea>
+                  </div>
+                  <div>
+                    <label class="form-label small fw-medium">Contact number</label>
+                    <input type="text" class="form-control" value="0917 555 0143">
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:4px">
+                    <span style="font-size:var(--text-sm);font-weight:var(--weight-medium);color:var(--text-secondary)">Company logo</span>
+                    <div style="display:flex;align-items:center;gap:14px">
+                      <div style="width:64px;height:64px;border-radius:var(--radius-md);background:var(--surface-canvas);border:1px solid var(--border-default);display:flex;align-items:center;justify-content:center;color:var(--text-muted);flex:0 0 auto">
+                        <i class="bi bi-buildings" style="font-size:24px"></i>
+                      </div>
+                      <div class="settings-logo-drop">
+                        <i class="bi bi-upload" style="font-size:15px"></i>
+                        <span style="font-size:var(--text-table)">Drop an image here, or <span style="color:var(--text-accent);font-weight:500">upload logo</span></span>
+                      </div>
+                    </div>
+                    <span style="font-size:var(--text-xs);color:var(--text-muted)">PNG or SVG, square, at least 128×128. Shown in the topbar and on payslips.</span>
+                  </div>
+                  <div style="border-top:1px solid var(--border-subtle);padding-top:14px;display:flex;justify-content:flex-end">
+                    <button type="button" class="btn-ds btn-ds-primary btn-ds-md">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Payroll ── -->
+          <div data-tab-content="payroll" class="d-none">
+            <div class="settings-cols">
+              <div class="content-card">
+                <div class="content-card-header"><div><div class="content-card-header-title">Earnings</div><div class="content-card-header-subtitle">How daily pay is computed</div></div></div>
+                <div class="content-card-body">
+                  <div style="display:flex;flex-direction:column;gap:16px">
+                    <div>
+                      <label class="form-label small fw-medium">Earning scheme</label>
+                      <select id="earning_scheme_static" class="form-select">
+                        <option value="fixed_rate" selected>Fixed rate</option>
+                        <option value="earned_per_day">Earned per day</option>
+                        <option value="contract">Contract</option>
+                        <option value="commission">Commission</option>
+                      </select>
+                      <span style="font-size:var(--text-xs);color:var(--text-muted)">Applies to all new pay periods.</span>
+                    </div>
+                    <div id="daily-rate-divisor-field-static">
+                      <label class="form-label small fw-medium">Daily rate divisor</label>
+                      <input type="number" class="form-control" value="26">
+                      <span style="font-size:var(--text-xs);color:var(--text-muted)">Monthly rate ÷ divisor = daily rate.</span>
+                    </div>
+                    <div style="border-top:1px solid var(--border-subtle);padding-top:14px;display:flex;justify-content:flex-end">
+                      <button type="button" class="btn-ds btn-ds-primary btn-ds-md">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="content-card">
+                <div class="content-card-header"><div><div class="content-card-header-title">Day types</div><div class="content-card-header-subtitle">Pay multipliers per day type</div></div></div>
+                <div class="content-card-body-flush">
+                  <table class="table-ds">
+                    <thead><tr><th>Day type</th><th class="table-ds-numeric">Multiplier</th><th>Active</th><th></th></tr></thead>
+                    <tbody>
+                      <tr>
+                        <td><input type="text" class="form-control form-control-sm" placeholder="Day type name"></td>
+                        <td class="table-ds-numeric"><input type="number" step="0.01" class="form-control form-control-sm" placeholder="1.00" style="width:80px;margin-left:auto"></td>
+                        <td></td>
+                        <td class="table-ds-numeric"><button type="button" class="icon-btn" style="width:26px;height:26px" title="Add day type"><i class="bi bi-plus-lg" style="font-size:14px"></i></button></td>
+                      </tr>
+                      <tr>
+                        <td>Regular day</td>
+                        <td class="table-ds-numeric">
+                          <span class="row-view-mode">1.00×</span>
+                          <input type="number" step="0.01" class="form-control form-control-sm row-edit-mode d-none" value="1.00" data-original="1.00" style="width:80px;margin-left:auto">
+                        </td>
+                        <td><label class="switch"><input type="checkbox" class="switch-input" checked><span class="switch-track"><span class="switch-knob"></span></span></label></td>
+                        <td class="table-ds-numeric">
+                          <button type="button" class="icon-btn row-view-mode" style="width:26px;height:26px" title="Edit multiplier" onclick="toggleRowEdit(this)"><i class="bi bi-pencil" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn row-edit-mode d-none" style="width:26px;height:26px" title="Save" onclick="toggleRowEdit(this)"><i class="bi bi-check-lg" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn row-edit-mode d-none" style="width:26px;height:26px" title="Cancel" onclick="cancelRowEdit(this)"><i class="bi bi-x-lg" style="font-size:14px"></i></button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Rest day</td>
+                        <td class="table-ds-numeric">
+                          <span class="row-view-mode">1.30×</span>
+                          <input type="number" step="0.01" class="form-control form-control-sm row-edit-mode d-none" value="1.30" data-original="1.30" style="width:80px;margin-left:auto">
+                        </td>
+                        <td><label class="switch"><input type="checkbox" class="switch-input" checked><span class="switch-track"><span class="switch-knob"></span></span></label></td>
+                        <td class="table-ds-numeric">
+                          <button type="button" class="icon-btn row-view-mode" style="width:26px;height:26px" title="Edit multiplier" onclick="toggleRowEdit(this)"><i class="bi bi-pencil" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn row-edit-mode d-none" style="width:26px;height:26px" title="Save" onclick="toggleRowEdit(this)"><i class="bi bi-check-lg" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn row-edit-mode d-none" style="width:26px;height:26px" title="Cancel" onclick="cancelRowEdit(this)"><i class="bi bi-x-lg" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn icon-btn-danger" style="width:26px;height:26px" title="Delete" data-bs-toggle="modal" data-bs-target="#delete-daytype-rest"><i class="bi bi-trash" style="font-size:14px"></i></button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Special holiday</td>
+                        <td class="table-ds-numeric">
+                          <span class="row-view-mode">1.30×</span>
+                          <input type="number" step="0.01" class="form-control form-control-sm row-edit-mode d-none" value="1.30" data-original="1.30" style="width:80px;margin-left:auto">
+                        </td>
+                        <td><label class="switch"><input type="checkbox" class="switch-input" checked><span class="switch-track"><span class="switch-knob"></span></span></label></td>
+                        <td class="table-ds-numeric">
+                          <button type="button" class="icon-btn row-view-mode" style="width:26px;height:26px" title="Edit multiplier" onclick="toggleRowEdit(this)"><i class="bi bi-pencil" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn row-edit-mode d-none" style="width:26px;height:26px" title="Save" onclick="toggleRowEdit(this)"><i class="bi bi-check-lg" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn row-edit-mode d-none" style="width:26px;height:26px" title="Cancel" onclick="cancelRowEdit(this)"><i class="bi bi-x-lg" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn icon-btn-danger" style="width:26px;height:26px" title="Delete" data-bs-toggle="modal" data-bs-target="#delete-daytype-special"><i class="bi bi-trash" style="font-size:14px"></i></button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Regular holiday</td>
+                        <td class="table-ds-numeric">
+                          <span class="row-view-mode">2.00×</span>
+                          <input type="number" step="0.01" class="form-control form-control-sm row-edit-mode d-none" value="2.00" data-original="2.00" style="width:80px;margin-left:auto">
+                        </td>
+                        <td><label class="switch"><input type="checkbox" class="switch-input" checked><span class="switch-track"><span class="switch-knob"></span></span></label></td>
+                        <td class="table-ds-numeric">
+                          <button type="button" class="icon-btn row-view-mode" style="width:26px;height:26px" title="Edit multiplier" onclick="toggleRowEdit(this)"><i class="bi bi-pencil" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn row-edit-mode d-none" style="width:26px;height:26px" title="Save" onclick="toggleRowEdit(this)"><i class="bi bi-check-lg" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn row-edit-mode d-none" style="width:26px;height:26px" title="Cancel" onclick="cancelRowEdit(this)"><i class="bi bi-x-lg" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn icon-btn-danger" style="width:26px;height:26px" title="Delete" data-bs-toggle="modal" data-bs-target="#delete-daytype-regular-holiday"><i class="bi bi-trash" style="font-size:14px"></i></button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Payroll cycle ── -->
+          <div data-tab-content="cycle" class="d-none">
+            <div style="display:flex;flex-direction:column;gap:var(--space-5)">
+              <div class="content-card">
+                <div class="content-card-header"><div><div class="content-card-header-title">Payroll cycle</div><div class="content-card-header-subtitle">How often pay periods run</div></div></div>
+                <div class="content-card-body">
+                  <div style="max-width:340px">
+                    <label class="form-label small fw-medium">Cycle</label>
+                    <select class="form-select">
+                      <option>Weekly</option>
+                      <option>Semi-Monthly</option>
+                      <option selected>Monthly</option>
+                    </select>
+                    <span style="font-size:var(--text-xs);color:var(--text-muted)">Changing the cycle only affects future periods.</span>
+                  </div>
+                </div>
+              </div>
+              <div class="content-card">
+                <div class="content-card-header"><div><div class="content-card-header-title">All pay periods</div><div class="content-card-header-subtitle">Every scheduled period this year</div></div></div>
+                <div class="content-card-body-flush">
+                  <table class="table-ds">
+                    <thead><tr><th class="table-ds-w-28">Period</th><th class="table-ds-w-38">Cutoff</th><th>Status</th><th class="table-ds-numeric"></th></tr></thead>
+                    <tbody>
+                      <tr>
+                        <td>May 2025</td>
+                        <td>
+                          <span class="row-view-mode">May 1 – 31, 2025</span>
+                          <span class="row-edit-mode d-none" style="display:flex;gap:6px;align-items:center">
+                            <input type="date" class="form-control form-control-sm" value="2025-05-01" data-original="2025-05-01" style="width:150px">
+                            <span>–</span>
+                            <input type="date" class="form-control form-control-sm" value="2025-05-31" data-original="2025-05-31" style="width:150px">
+                          </span>
+                        </td>
+                        <td><span style="display:inline-flex;align-items:center;gap:4px;background:var(--status-finalized-bg);color:var(--status-finalized-text);border-radius:var(--badge-radius-pill);font-family:var(--font-ui);font-size:var(--text-xs);font-weight:var(--weight-semibold);padding:2px 6px;"><i class="bi bi-check-circle-fill" style="font-size:10px"></i>Finalized</span></td>
+                        <td class="table-ds-numeric"><button type="button" class="icon-btn" style="width:26px;height:26px" disabled title="Finalized periods can't be modified"><i class="bi bi-pencil" style="font-size:14px"></i></button></td>
+                      </tr>
+                      <tr>
+                        <td>Jun 2025</td>
+                        <td>
+                          <span class="row-view-mode">Jun 1 – 30, 2025</span>
+                          <span class="row-edit-mode d-none" style="display:flex;gap:6px;align-items:center">
+                            <input type="date" class="form-control form-control-sm" value="2025-06-01" data-original="2025-06-01" style="width:150px">
+                            <span>–</span>
+                            <input type="date" class="form-control form-control-sm" value="2025-06-30" data-original="2025-06-30" style="width:150px">
+                          </span>
+                        </td>
+                        <td><span style="display:inline-flex;align-items:center;gap:4px;background:var(--status-open-bg);color:var(--status-open-text);border:0.5px solid var(--status-open-border);border-radius:var(--badge-radius-soft);font-family:var(--font-ui);font-size:var(--text-xs);font-weight:var(--weight-semibold);padding:2px 6px;"><i class="bi bi-clock" style="font-size:10px"></i>Open</span></td>
+                        <td class="table-ds-numeric">
+                          <button type="button" class="icon-btn row-view-mode" style="width:26px;height:26px" title="Edit cutoff dates" onclick="toggleRowEdit(this)"><i class="bi bi-pencil" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn row-edit-mode d-none" style="width:26px;height:26px" title="Save" disabled><i class="bi bi-check-lg" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn row-edit-mode d-none" style="width:26px;height:26px" title="Cancel" onclick="cancelRowEdit(this)"><i class="bi bi-x-lg" style="font-size:14px"></i></button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Jul 2025</td>
+                        <td>
+                          <span class="row-view-mode">Jul 1 – 31, 2025</span>
+                          <span class="row-edit-mode d-none" style="display:flex;gap:6px;align-items:center">
+                            <input type="date" class="form-control form-control-sm" value="2025-07-01" data-original="2025-07-01" style="width:150px">
+                            <span>–</span>
+                            <input type="date" class="form-control form-control-sm" value="2025-07-31" data-original="2025-07-31" style="width:150px">
+                          </span>
+                        </td>
+                        <td><span style="display:inline-flex;align-items:center;gap:4px;background:transparent;color:var(--text-muted);border:1px solid var(--border-default);border-radius:var(--badge-radius-flat);font-family:var(--font-ui);font-size:var(--text-xs);font-weight:var(--weight-semibold);padding:2px 6px;"><i class="bi bi-calendar3" style="font-size:10px"></i>Upcoming</span></td>
+                        <td class="table-ds-numeric">
+                          <button type="button" class="icon-btn row-view-mode" style="width:26px;height:26px" title="Edit cutoff dates" onclick="toggleRowEdit(this)"><i class="bi bi-pencil" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn row-edit-mode d-none" style="width:26px;height:26px" title="Save" disabled><i class="bi bi-check-lg" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn row-edit-mode d-none" style="width:26px;height:26px" title="Cancel" onclick="cancelRowEdit(this)"><i class="bi bi-x-lg" style="font-size:14px"></i></button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <a href="#" style="align-self:flex-start;display:inline-flex;align-items:center;gap:6px;font-family:var(--font-ui);font-size:var(--text-sm);color:var(--text-accent);text-decoration:none;font-weight:500">
+                <span>Go to Payroll Schedule</span>
+                <i class="bi bi-arrow-right" style="font-size:13px"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- ── Attendance ── -->
+          <div data-tab-content="attendance" class="d-none">
+            <div style="display:flex;flex-direction:column;gap:var(--space-5)">
+              <div class="content-card">
+                <div class="content-card-header"><div><div class="content-card-header-title">Attendance policy</div></div></div>
+                <div class="content-card-body">
+                  <div style="display:flex;flex-direction:column;gap:16px;max-width:560px">
+                    <div>
+                      <label class="form-label small fw-medium">Attendance policy</label>
+                      <select class="form-select">
+                        <option selected>Days worked (manual entry)</option>
+                        <option>Time records (time in / out)</option>
+                      </select>
+                      <span style="font-size:var(--text-xs);color:var(--text-muted)">How days worked are recorded per period.</span>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" checked>
+                      <label class="form-check-label small">Allow NTR (no time record) entries</label>
+                    </div>
+                    <div>
+                      <label class="form-label small fw-medium">Notification threshold</label>
+                      <div style="display:flex;align-items:center;gap:8px">
+                        <input type="number" class="form-control" style="max-width:120px" value="3">
+                        <span style="font-size:var(--text-table);color:var(--text-muted)">days before cutoff</span>
+                      </div>
+                      <span style="font-size:var(--text-xs);color:var(--text-muted)">Warn this long before each cutoff.</span>
+                    </div>
+                    <div style="border-top:1px solid var(--border-subtle);padding-top:14px;display:flex;justify-content:flex-end">
+                      <button type="button" class="btn-ds btn-ds-primary btn-ds-md">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="content-card">
+                <div class="content-card-header"><div><div class="content-card-header-title">Time & attendance rules</div><div class="content-card-header-subtitle">Defaults applied when time records are used</div></div></div>
+                <div class="content-card-body">
+                  <div style="display:flex;flex-direction:column;gap:16px">
+                    <div class="settings-rules-grid">
+                      <div><label class="form-label small fw-medium">Default time in</label><input type="time" class="form-control" value="06:00"></div>
+                      <div><label class="form-label small fw-medium">Default time out</label><input type="time" class="form-control" value="15:00"></div>
+                      <div>
+                        <label class="form-label small fw-medium">Late arrival threshold</label>
+                        <div style="display:flex;align-items:center;gap:8px"><input type="number" class="form-control" style="max-width:100px" value="15"><span style="font-size:var(--text-table);color:var(--text-muted)">minutes</span></div>
+                        <span style="font-size:var(--text-xs);color:var(--text-muted)">Grace period before an arrival counts as late.</span>
+                      </div>
+                      <div>
+                        <label class="form-label small fw-medium">Break duration</label>
+                        <div style="display:flex;align-items:center;gap:8px"><input type="number" class="form-control" style="max-width:100px" value="60"><span style="font-size:var(--text-table);color:var(--text-muted)">minutes</span></div>
+                        <span style="font-size:var(--text-xs);color:var(--text-muted)">Unpaid; deducted from logged hours.</span>
+                      </div>
+                      <div>
+                        <label class="form-label small fw-medium">Regular hours per day</label>
+                        <div style="display:flex;align-items:center;gap:8px"><input type="number" class="form-control" style="max-width:100px" value="8"><span style="font-size:var(--text-table);color:var(--text-muted)">hours</span></div>
+                        <span style="font-size:var(--text-xs);color:var(--text-muted)">Hours beyond this count as overtime.</span>
+                      </div>
+                      <div>
+                        <label class="form-label small fw-medium">Half-day minimum</label>
+                        <div style="display:flex;align-items:center;gap:8px"><input type="number" class="form-control" style="max-width:100px" value="4"><span style="font-size:var(--text-table);color:var(--text-muted)">hours</span></div>
+                        <span style="font-size:var(--text-xs);color:var(--text-muted)">Below this, the day is not counted.</span>
+                      </div>
+                    </div>
+                    <div style="display:flex;align-items:flex-start;gap:8px;background:var(--surface-content-alt);border:1px solid var(--border-subtle);border-radius:var(--radius-md);padding:10px 12px">
+                      <i class="bi bi-info-circle" style="font-size:13px;color:var(--text-muted);line-height:1.5"></i>
+                      <span style="font-size:var(--text-sm);color:var(--text-secondary);line-height:1.5">These are company-wide defaults. Individual workers can be given overrides from their worker profile.</span>
+                    </div>
+                    <div style="border-top:1px solid var(--border-subtle);padding-top:14px;display:flex;justify-content:flex-end">
+                      <button type="button" class="btn-ds btn-ds-primary btn-ds-md" disabled>Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Deductions ── -->
+          <div data-tab-content="deductions" class="d-none">
+            <div style="display:flex;flex-direction:column;gap:var(--space-5)">
+              <div class="content-card">
+                <div class="content-card-body" style="padding:10px var(--space-6)">
+                  <div style="display:flex;gap:10px;align-items:end;flex-wrap:wrap">
+                    <div style="flex:1;min-width:160px">
+                      <label class="form-label small fw-medium">Name</label>
+                      <input type="text" class="form-control form-control-sm" placeholder="Deduction name">
+                    </div>
+                    <div>
+                      <label class="form-label small fw-medium">Category</label>
+                      <select class="form-select form-select-sm">
+                        <option>Government Contributions</option>
+                        <option>Company Deductions</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label class="form-label small fw-medium">Applies to cut-off</label>
+                      <select class="form-select form-select-sm">
+                        <option>All cutoffs</option>
+                        <option>First only</option>
+                        <option>Second only</option>
+                      </select>
+                    </div>
+                    <div class="form-check" style="margin-bottom:6px">
+                      <input type="checkbox" class="form-check-input" id="is_recurring_top_static">
+                      <label class="form-check-label small" for="is_recurring_top_static">Recurring</label>
+                    </div>
+                    <button type="button" class="btn-ds btn-ds-primary btn-ds-sm"><i class="bi bi-plus-lg"></i>Add deduction type</button>
+                  </div>
+                </div>
+              </div>
+              <div class="content-card">
+                <div class="content-card-header"><div><div class="content-card-header-title">Government contributions</div><div class="content-card-header-subtitle">Statutory deductions</div></div></div>
+                <div class="content-card-body-flush">
+                  <table class="table-ds">
+                    <thead><tr><th class="table-ds-w-28">Deduction type</th><th class="table-ds-w-28">Category</th><th>Calculation</th><th>Status</th><th class="table-ds-numeric"></th></tr></thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="row-view-mode">SSS</span>
+                          <input type="text" class="form-control form-control-sm row-edit-mode d-none" value="SSS" data-original="SSS">
+                        </td>
+                        <td>
+                          <span class="row-view-mode">Government Contributions</span>
+                          <select class="form-select form-select-sm row-edit-mode d-none" data-original="Government Contributions">
+                            <option selected>Government Contributions</option>
+                            <option>Company Deductions</option>
+                          </select>
+                        </td>
+                        <td>Contribution table</td>
+                        <td><span style="display:inline-flex;align-items:center;gap:4px;background:var(--status-finalized-bg);color:var(--status-finalized-text);border-radius:var(--badge-radius-pill);font-family:var(--font-ui);font-size:var(--text-xs);font-weight:var(--weight-semibold);padding:2px 6px;"><i class="bi bi-check-circle-fill" style="font-size:10px"></i>Finalized</span></td>
+                        <td class="table-ds-numeric">
+                          <button type="button" class="icon-btn row-view-mode" style="width:26px;height:26px" title="Edit" onclick="toggleRowEdit(this)"><i class="bi bi-pencil" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn row-edit-mode d-none" style="width:26px;height:26px" title="Save" onclick="toggleRowEdit(this)"><i class="bi bi-check-lg" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn row-edit-mode d-none" style="width:26px;height:26px" title="Cancel" onclick="cancelRowEdit(this)"><i class="bi bi-x-lg" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn icon-btn-danger" style="width:26px;height:26px" data-bs-toggle="modal" data-bs-target="#delete-sss"><i class="bi bi-trash" style="font-size:14px"></i></button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="row-view-mode">PhilHealth</span>
+                          <input type="text" class="form-control form-control-sm row-edit-mode d-none" value="PhilHealth" data-original="PhilHealth">
+                        </td>
+                        <td>
+                          <span class="row-view-mode">Government Contributions</span>
+                          <select class="form-select form-select-sm row-edit-mode d-none" data-original="Government Contributions">
+                            <option selected>Government Contributions</option>
+                            <option>Company Deductions</option>
+                          </select>
+                        </td>
+                        <td>2.5% of monthly basic</td>
+                        <td><span style="display:inline-flex;align-items:center;gap:4px;background:var(--status-finalized-bg);color:var(--status-finalized-text);border-radius:var(--badge-radius-pill);font-family:var(--font-ui);font-size:var(--text-xs);font-weight:var(--weight-semibold);padding:2px 6px;"><i class="bi bi-check-circle-fill" style="font-size:10px"></i>Finalized</span></td>
+                        <td class="table-ds-numeric">
+                          <button type="button" class="icon-btn row-view-mode" style="width:26px;height:26px" title="Edit" onclick="toggleRowEdit(this)"><i class="bi bi-pencil" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn row-edit-mode d-none" style="width:26px;height:26px" title="Save" onclick="toggleRowEdit(this)"><i class="bi bi-check-lg" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn row-edit-mode d-none" style="width:26px;height:26px" title="Cancel" onclick="cancelRowEdit(this)"><i class="bi bi-x-lg" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn icon-btn-danger" style="width:26px;height:26px" data-bs-toggle="modal" data-bs-target="#delete-phic"><i class="bi bi-trash" style="font-size:14px"></i></button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="row-view-mode">Pag-IBIG</span>
+                          <input type="text" class="form-control form-control-sm row-edit-mode d-none" value="Pag-IBIG" data-original="Pag-IBIG">
+                        </td>
+                        <td>
+                          <span class="row-view-mode">Government Contributions</span>
+                          <select class="form-select form-select-sm row-edit-mode d-none" data-original="Government Contributions">
+                            <option selected>Government Contributions</option>
+                            <option>Company Deductions</option>
+                          </select>
+                        </td>
+                        <td>Fixed ₱200.00</td>
+                        <td><span style="display:inline-flex;align-items:center;gap:4px;background:var(--status-finalized-bg);color:var(--status-finalized-text);border-radius:var(--badge-radius-pill);font-family:var(--font-ui);font-size:var(--text-xs);font-weight:var(--weight-semibold);padding:2px 6px;"><i class="bi bi-check-circle-fill" style="font-size:10px"></i>Finalized</span></td>
+                        <td class="table-ds-numeric">
+                          <button type="button" class="icon-btn row-view-mode" style="width:26px;height:26px" title="Edit" onclick="toggleRowEdit(this)"><i class="bi bi-pencil" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn row-edit-mode d-none" style="width:26px;height:26px" title="Save" onclick="toggleRowEdit(this)"><i class="bi bi-check-lg" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn row-edit-mode d-none" style="width:26px;height:26px" title="Cancel" onclick="cancelRowEdit(this)"><i class="bi bi-x-lg" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn icon-btn-danger" style="width:26px;height:26px" data-bs-toggle="modal" data-bs-target="#delete-hdmf"><i class="bi bi-trash" style="font-size:14px"></i></button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="row-view-mode">Withholding tax</span>
+                          <input type="text" class="form-control form-control-sm row-edit-mode d-none" value="Withholding tax" data-original="Withholding tax">
+                        </td>
+                        <td>
+                          <span class="row-view-mode">Government Contributions</span>
+                          <select class="form-select form-select-sm row-edit-mode d-none" data-original="Government Contributions">
+                            <option selected>Government Contributions</option>
+                            <option>Company Deductions</option>
+                          </select>
+                        </td>
+                        <td>BIR table</td>
+                        <td><span style="display:inline-flex;align-items:center;gap:4px;background:var(--status-draft-bg);color:var(--status-draft-text);border-radius:var(--badge-radius-flat);font-family:var(--font-ui);font-size:var(--text-xs);font-weight:var(--weight-semibold);padding:2px 6px;"><i class="bi bi-pencil" style="font-size:10px"></i>Draft</span></td>
+                        <td class="table-ds-numeric">
+                          <button type="button" class="icon-btn row-view-mode" style="width:26px;height:26px" title="Edit" onclick="toggleRowEdit(this)"><i class="bi bi-pencil" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn row-edit-mode d-none" style="width:26px;height:26px" title="Save" onclick="toggleRowEdit(this)"><i class="bi bi-check-lg" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn row-edit-mode d-none" style="width:26px;height:26px" title="Cancel" onclick="cancelRowEdit(this)"><i class="bi bi-x-lg" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn icon-btn-danger" style="width:26px;height:26px" data-bs-toggle="modal" data-bs-target="#delete-tax"><i class="bi bi-trash" style="font-size:14px"></i></button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="content-card">
+                <div class="content-card-header"><div><div class="content-card-header-title">Company deductions</div><div class="content-card-header-subtitle">Internal charges and advances</div></div></div>
+                <div class="content-card-body-flush">
+                  <table class="table-ds">
+                    <thead><tr><th class="table-ds-w-28">Deduction type</th><th class="table-ds-w-28">Category</th><th>Calculation</th><th>Status</th><th class="table-ds-numeric"></th></tr></thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="row-view-mode">Cash advance</span>
+                          <input type="text" class="form-control form-control-sm row-edit-mode d-none" value="Cash advance" data-original="Cash advance">
+                        </td>
+                        <td>
+                          <span class="row-view-mode">Company Deductions</span>
+                          <select class="form-select form-select-sm row-edit-mode d-none" data-original="Company Deductions">
+                            <option>Government Contributions</option>
+                            <option selected>Company Deductions</option>
+                          </select>
+                        </td>
+                        <td>Per-worker amount</td>
+                        <td><span style="display:inline-flex;align-items:center;gap:4px;background:var(--status-finalized-bg);color:var(--status-finalized-text);border-radius:var(--badge-radius-pill);font-family:var(--font-ui);font-size:var(--text-xs);font-weight:var(--weight-semibold);padding:2px 6px;"><i class="bi bi-check-circle-fill" style="font-size:10px"></i>Finalized</span></td>
+                        <td class="table-ds-numeric">
+                          <button type="button" class="icon-btn row-view-mode" style="width:26px;height:26px" title="Edit" onclick="toggleRowEdit(this)"><i class="bi bi-pencil" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn row-edit-mode d-none" style="width:26px;height:26px" title="Save" onclick="toggleRowEdit(this)"><i class="bi bi-check-lg" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn row-edit-mode d-none" style="width:26px;height:26px" title="Cancel" onclick="cancelRowEdit(this)"><i class="bi bi-x-lg" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn icon-btn-danger" style="width:26px;height:26px" data-bs-toggle="modal" data-bs-target="#delete-ca"><i class="bi bi-trash" style="font-size:14px"></i></button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="row-view-mode">Canteen</span>
+                          <input type="text" class="form-control form-control-sm row-edit-mode d-none" value="Canteen" data-original="Canteen">
+                        </td>
+                        <td>
+                          <span class="row-view-mode">Company Deductions</span>
+                          <select class="form-select form-select-sm row-edit-mode d-none" data-original="Company Deductions">
+                            <option>Government Contributions</option>
+                            <option selected>Company Deductions</option>
+                          </select>
+                        </td>
+                        <td>Per-worker amount</td>
+                        <td><span style="display:inline-flex;align-items:center;gap:4px;background:var(--status-draft-bg);color:var(--status-draft-text);border-radius:var(--badge-radius-flat);font-family:var(--font-ui);font-size:var(--text-xs);font-weight:var(--weight-semibold);padding:2px 6px;"><i class="bi bi-pencil" style="font-size:10px"></i>Draft</span></td>
+                        <td class="table-ds-numeric">
+                          <button type="button" class="icon-btn row-view-mode" style="width:26px;height:26px" title="Edit" onclick="toggleRowEdit(this)"><i class="bi bi-pencil" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn row-edit-mode d-none" style="width:26px;height:26px" title="Save" onclick="toggleRowEdit(this)"><i class="bi bi-check-lg" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn row-edit-mode d-none" style="width:26px;height:26px" title="Cancel" onclick="cancelRowEdit(this)"><i class="bi bi-x-lg" style="font-size:14px"></i></button>
+                          <button type="button" class="icon-btn icon-btn-danger" style="width:26px;height:26px" data-bs-toggle="modal" data-bs-target="#delete-canteen"><i class="bi bi-trash" style="font-size:14px"></i></button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Delete confirmation dialogs (decorative — preview only, nothing is actually deleted) -->
+  <div class="modal fade" id="delete-sss" tabindex="-1"><div class="modal-dialog modal-dialog-centered" style="max-width:460px"><div class="modal-content dialog-box"><div class="dialog-header"><h4 class="dialog-title">Delete deduction type</h4><button type="button" class="dialog-close" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg"></i></button></div><div class="dialog-body">Delete <strong style="color:var(--text-primary)">SSS</strong>? It will be removed from all future pay periods. Payslips already finalized keep their existing deductions.</div><div class="dialog-footer"><button type="button" class="btn-ds btn-ds-md btn-ds-secondary" data-bs-dismiss="modal">Cancel</button><button type="button" class="btn-ds btn-ds-md btn-ds-danger" data-bs-dismiss="modal">Delete</button></div></div></div></div>
+  <div class="modal fade" id="delete-phic" tabindex="-1"><div class="modal-dialog modal-dialog-centered" style="max-width:460px"><div class="modal-content dialog-box"><div class="dialog-header"><h4 class="dialog-title">Delete deduction type</h4><button type="button" class="dialog-close" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg"></i></button></div><div class="dialog-body">Delete <strong style="color:var(--text-primary)">PhilHealth</strong>? It will be removed from all future pay periods. Payslips already finalized keep their existing deductions.</div><div class="dialog-footer"><button type="button" class="btn-ds btn-ds-md btn-ds-secondary" data-bs-dismiss="modal">Cancel</button><button type="button" class="btn-ds btn-ds-md btn-ds-danger" data-bs-dismiss="modal">Delete</button></div></div></div></div>
+  <div class="modal fade" id="delete-hdmf" tabindex="-1"><div class="modal-dialog modal-dialog-centered" style="max-width:460px"><div class="modal-content dialog-box"><div class="dialog-header"><h4 class="dialog-title">Delete deduction type</h4><button type="button" class="dialog-close" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg"></i></button></div><div class="dialog-body">Delete <strong style="color:var(--text-primary)">Pag-IBIG</strong>? It will be removed from all future pay periods. Payslips already finalized keep their existing deductions.</div><div class="dialog-footer"><button type="button" class="btn-ds btn-ds-md btn-ds-secondary" data-bs-dismiss="modal">Cancel</button><button type="button" class="btn-ds btn-ds-md btn-ds-danger" data-bs-dismiss="modal">Delete</button></div></div></div></div>
+  <div class="modal fade" id="delete-tax" tabindex="-1"><div class="modal-dialog modal-dialog-centered" style="max-width:460px"><div class="modal-content dialog-box"><div class="dialog-header"><h4 class="dialog-title">Delete deduction type</h4><button type="button" class="dialog-close" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg"></i></button></div><div class="dialog-body">Delete <strong style="color:var(--text-primary)">Withholding tax</strong>? It will be removed from all future pay periods. Payslips already finalized keep their existing deductions.</div><div class="dialog-footer"><button type="button" class="btn-ds btn-ds-md btn-ds-secondary" data-bs-dismiss="modal">Cancel</button><button type="button" class="btn-ds btn-ds-md btn-ds-danger" data-bs-dismiss="modal">Delete</button></div></div></div></div>
+  <div class="modal fade" id="delete-ca" tabindex="-1"><div class="modal-dialog modal-dialog-centered" style="max-width:460px"><div class="modal-content dialog-box"><div class="dialog-header"><h4 class="dialog-title">Delete deduction type</h4><button type="button" class="dialog-close" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg"></i></button></div><div class="dialog-body">Delete <strong style="color:var(--text-primary)">Cash advance</strong>? It will be removed from all future pay periods. Payslips already finalized keep their existing deductions.</div><div class="dialog-footer"><button type="button" class="btn-ds btn-ds-md btn-ds-secondary" data-bs-dismiss="modal">Cancel</button><button type="button" class="btn-ds btn-ds-md btn-ds-danger" data-bs-dismiss="modal">Delete</button></div></div></div></div>
+  <div class="modal fade" id="delete-canteen" tabindex="-1"><div class="modal-dialog modal-dialog-centered" style="max-width:460px"><div class="modal-content dialog-box"><div class="dialog-header"><h4 class="dialog-title">Delete deduction type</h4><button type="button" class="dialog-close" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg"></i></button></div><div class="dialog-body">Delete <strong style="color:var(--text-primary)">Canteen</strong>? It will be removed from all future pay periods. Payslips already finalized keep their existing deductions.</div><div class="dialog-footer"><button type="button" class="btn-ds btn-ds-md btn-ds-secondary" data-bs-dismiss="modal">Cancel</button><button type="button" class="btn-ds btn-ds-md btn-ds-danger" data-bs-dismiss="modal">Delete</button></div></div></div></div>
+  <div class="modal fade" id="delete-daytype-rest" tabindex="-1"><div class="modal-dialog modal-dialog-centered" style="max-width:460px"><div class="modal-content dialog-box"><div class="dialog-header"><h4 class="dialog-title">Delete day type</h4><button type="button" class="dialog-close" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg"></i></button></div><div class="dialog-body">Delete <strong style="color:var(--text-primary)">Rest day</strong>? This cannot be undone.</div><div class="dialog-footer"><button type="button" class="btn-ds btn-ds-md btn-ds-secondary" data-bs-dismiss="modal">Cancel</button><button type="button" class="btn-ds btn-ds-md btn-ds-danger" data-bs-dismiss="modal">Delete</button></div></div></div></div>
+  <div class="modal fade" id="delete-daytype-special" tabindex="-1"><div class="modal-dialog modal-dialog-centered" style="max-width:460px"><div class="modal-content dialog-box"><div class="dialog-header"><h4 class="dialog-title">Delete day type</h4><button type="button" class="dialog-close" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg"></i></button></div><div class="dialog-body">Delete <strong style="color:var(--text-primary)">Special holiday</strong>? This cannot be undone.</div><div class="dialog-footer"><button type="button" class="btn-ds btn-ds-md btn-ds-secondary" data-bs-dismiss="modal">Cancel</button><button type="button" class="btn-ds btn-ds-md btn-ds-danger" data-bs-dismiss="modal">Delete</button></div></div></div></div>
+  <div class="modal fade" id="delete-daytype-regular-holiday" tabindex="-1"><div class="modal-dialog modal-dialog-centered" style="max-width:460px"><div class="modal-content dialog-box"><div class="dialog-header"><h4 class="dialog-title">Delete day type</h4><button type="button" class="dialog-close" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg"></i></button></div><div class="dialog-body">Delete <strong style="color:var(--text-primary)">Regular holiday</strong>? This cannot be undone.</div><div class="dialog-footer"><button type="button" class="btn-ds btn-ds-md btn-ds-secondary" data-bs-dismiss="modal">Cancel</button><button type="button" class="btn-ds btn-ds-md btn-ds-danger" data-bs-dismiss="modal">Delete</button></div></div></div></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.getElementById('sidebarToggle').addEventListener('click', function () {
+      document.getElementById('sidebar').classList.toggle('collapsed');
+    });
+
+    var profileToggle = document.getElementById('profileToggle');
+    var profileMenu = document.getElementById('profileMenu');
+    var quickToggle = document.getElementById('quickToggle');
+    var quickMenu = document.getElementById('quickMenu');
+
+    profileToggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      profileMenu.classList.toggle('show');
+      quickMenu.classList.remove('show');
+    });
+    quickToggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      quickMenu.classList.toggle('show');
+      profileMenu.classList.remove('show');
+    });
+    profileMenu.addEventListener('click', function (e) {
+      e.stopPropagation();
+    });
+    quickMenu.addEventListener('click', function (e) {
+      e.stopPropagation();
+    });
+    document.addEventListener('click', function () {
+      profileMenu.classList.remove('show');
+      quickMenu.classList.remove('show');
+    });
+
+    function toggleRowEdit(btn) {
+      var row = btn.closest('tr');
+      row.querySelectorAll('.row-view-mode').forEach(function (el) { el.classList.toggle('d-none'); });
+      row.querySelectorAll('.row-edit-mode').forEach(function (el) { el.classList.toggle('d-none'); });
+    }
+    function cancelRowEdit(btn) {
+      var row = btn.closest('tr');
+      row.querySelectorAll('.row-edit-mode input[data-original]').forEach(function (el) { el.value = el.dataset.original; });
+      row.querySelectorAll('.row-edit-mode select[data-original]').forEach(function (el) { el.value = el.dataset.original; });
+      toggleRowEdit(btn);
+    }
+
+    var tabButtons = document.querySelectorAll('.tabs-item[data-tab]');
+    var tabContents = document.querySelectorAll('[data-tab-content]');
+    tabButtons.forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        var target = btn.getAttribute('data-tab');
+        tabButtons.forEach(function (b) { b.classList.toggle('tabs-item-active', b === btn); });
+        tabContents.forEach(function (c) { c.classList.toggle('d-none', c.getAttribute('data-tab-content') !== target); });
+      });
+    });
+
+    document.getElementById('earning_scheme_static').addEventListener('change', function () {
+      document.getElementById('daily-rate-divisor-field-static').classList.toggle('d-none', this.value !== 'fixed_rate');
+    });
+  </script>
+</body>
+</html>
