@@ -93,7 +93,7 @@
   --border-width        : 1px;
   --border-solid        : 1px solid var(--border-default);
   --border-subtle-solid : 1px solid var(--border-subtle);
-  --border-structural   : #c5cbd1;
+  --border-structural   : #c5cbd1;  
 
   /* ── TEXT ── */
   --text-primary   : #1a2a1a;
@@ -284,7 +284,7 @@ h3, h4, h5, h6 {
 .badge-upcoming {
   background-color: transparent;
   color: var(--text-muted);
-  border: 1px solid var(--border-default);
+  border: 1px dashed var(--border-default);
   border-radius: var(--badge-radius-flat);
   font-size: var(--badge-font-size);
   font-weight: var(--badge-font-weight);
@@ -622,6 +622,35 @@ body {
   .settings-rules-grid {
     grid-template-columns: 1fr;
   }
+  .schedule-row {
+    grid-template-columns: minmax(150px, 1.5fr) minmax(96px, 0.8fr) 118px;
+  }
+  .schedule-metric {
+    display: none;
+  }
+}
+
+/* ── PAYROLL SCHEDULE — period row grid ──
+   Media queries can't override inline-style specificity, so the column
+   count/widths live here instead of on each row. */
+.schedule-row {
+  display: grid;
+  grid-template-columns: minmax(170px, 1.5fr) minmax(84px, 0.7fr) minmax(100px, 0.8fr) minmax(100px, 0.8fr) minmax(104px, 0.8fr) 128px;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 20px;
+  border-bottom: var(--border-subtle-solid);
+}
+.schedule-row:hover {
+  background: var(--color-accent-subtle);
+}
+.schedule-row-active {
+  padding-left: 17px;
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-accent-subtle);
+}
+.schedule-row-active:hover {
+  background: var(--color-accent-subtle);
 }
 
 /* ── SETTINGS — two-column layout (Payroll tab) ── */
