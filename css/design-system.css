@@ -828,3 +828,101 @@ body {
   opacity: 0.55;
   cursor: not-allowed;
 }
+
+/* ── CHECKBOX COMPONENT ── */
+.checkbox-ds {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: var(--text-table);
+  color: var(--text-primary);
+  user-select: none;
+}
+.checkbox-ds-label-header {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-base);
+  color: var(--text-primary);
+}
+.checkbox-ds-input {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  margin: 0;
+  border: 1px solid var(--border-default);
+  border-radius: 4px;
+  background: var(--surface-content);
+  cursor: pointer;
+  position: relative;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+/* :indeterminate can only be set via JS (element.indeterminate = true), not an HTML attribute */
+.checkbox-ds-input:checked,
+.checkbox-ds-input:indeterminate {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+.checkbox-ds-input:checked::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 5px;
+  height: 9px;
+  border: solid var(--text-on-accent);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.checkbox-ds-input:indeterminate::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 6.5px;
+  width: 8px;
+  height: 2px;
+  background: var(--text-on-accent);
+}
+
+/* ── WIZARD STEP INDICATOR ── */
+.wiz-step-dot {
+  width: 26px;
+  height: 26px;
+  border-radius: 99px;
+  flex: 0 0 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+}
+.wiz-step-dot-done { background: var(--color-accent); border: 1px solid var(--color-accent); color: var(--text-on-accent); }
+.wiz-step-dot-current { background: var(--surface-content); border: 2px solid var(--color-accent); color: var(--text-accent); box-shadow: 0 0 0 3px var(--color-accent-subtle); }
+.wiz-step-dot-upcoming { background: var(--surface-content); border: 1px solid var(--border-default); color: var(--text-muted); }
+.wiz-step-label { font-size: var(--text-xs); white-space: nowrap; line-height: 1; }
+.wiz-step-label-done { color: var(--text-secondary); font-weight: 500; }
+.wiz-step-label-current { color: var(--text-accent); font-weight: 600; }
+.wiz-step-label-upcoming { color: var(--text-muted); font-weight: 400; }
+.wiz-step-item { display: flex; flex-direction: column; align-items: center; gap: 5px; width: 72px; }
+.wiz-step-connector { width: 56px; height: 2px; margin-top: 12px; border-radius: 99px; background: var(--border-default); flex: 0 0 auto; }
+.wiz-step-connector-done { background: var(--color-accent); }
+
+/* ── EMPLOYEE ROW GRID (Wizard Step 1) ── */
+.emp-row {
+  display: grid;
+  grid-template-columns: 28px 1.4fr 1fr 0.9fr;
+  gap: 0 12px;
+  align-items: center;
+  min-height: 44px;
+  padding: 7px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+@media (max-width: 1024px) {
+  .emp-row { grid-template-columns: 28px 1.4fr 1fr; }
+  .emp-status-col { display: none; }
+  .wiz-step-label { display: none; }
+}
